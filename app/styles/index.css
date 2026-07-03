@@ -1,0 +1,369 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light Theme (default) ── */
+:root,
+[data-theme="light"] {
+  --titan-primary: #0a0a0a;
+  --titan-secondary: #ffffff;
+  --titan-secondary-rgb: 255, 255, 255;
+  --titan-bg: #ffffff;
+  --titan-bg-rgb: 255, 255, 255;
+  --titan-accent: rgba(0, 0, 0, 0.72);
+  --titan-nav-bg: rgba(255, 255, 255, 0.84);
+  --titan-nav-item: rgba(0, 0, 0, 0.68);
+  --titan-nav-item-active-bg: rgba(0, 0, 0, 0.055);
+  --titan-danger: #dc2626;
+  --titan-danger-light: #ef4444;
+  --titan-danger-rgb: 220, 38, 38;
+  --titan-card-bg: rgba(255, 255, 255, 0.34);
+  --titan-card-border: rgba(0, 0, 0, 0.12);
+  --titan-glass-bg: rgba(255, 255, 255, 0.28);
+  --titan-glass-border: rgba(255, 255, 255, 0.68);
+  --titan-glass-shadow:
+    18px 18px 42px rgba(0, 0, 0, 0.16),
+    -16px -16px 38px rgba(255, 255, 255, 0.95),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.06);
+  --titan-text-muted: rgba(0, 0, 0, 0.5);
+  --titan-glow: rgba(0, 0, 0, 0.08);
+  --titan-input-bg: rgba(255, 255, 255, 0.58);
+  --titan-input-border: rgba(0, 0, 0, 0.14);
+  --titan-hover: rgba(0, 0, 0, 0.055);
+  --titan-border-hover: rgba(0, 0, 0, 0.22);
+  --titan-edge-highlight: rgba(255, 255, 255, 0.95);
+  --titan-edge-shadow: rgba(0, 0, 0, 0.12);
+  --titan-button-bg: rgba(255, 255, 255, 0.3);
+  --titan-page-gradient:
+    radial-gradient(
+      ellipse at 12% 8%,
+      rgba(235, 237, 255, 0.34) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 82% 16%,
+      rgba(243, 242, 248, 0.4) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 50% 92%,
+      rgba(219, 248, 255, 0.42) 0%,
+      transparent 48%
+    );
+
+  /* Neomorphism */
+  --titan-neo-bg: rgba(248, 248, 248, 0.9);
+  --titan-neo-raised:
+    14px 14px 36px rgba(0, 0, 0, 0.18),
+    -14px -14px 34px rgba(255, 255, 255, 0.95),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.08);
+  --titan-neo-raised-sm:
+    8px 8px 22px rgba(0, 0, 0, 0.16), -7px -7px 20px rgba(255, 255, 255, 0.95),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.08);
+  --titan-neo-inset:
+    inset 7px 7px 16px rgba(0, 0, 0, 0.16),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.85);
+  --titan-neo-hover:
+    18px 18px 46px rgba(0, 0, 0, 0.22), -12px -12px 34px rgba(255, 255, 255, 1),
+    inset 1px 1px 0 rgba(255, 255, 255, 1), inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+  --titan-sidebar-bg: rgba(255, 255, 255, 0.55);
+  --titan-sidebar-width: 80px;
+  --titan-sidebar-expanded: 220px;
+
+  /* Liquid Glass */
+  --titan-liquid-bg: rgba(255, 255, 255, 0.18);
+  --titan-liquid-border: rgba(255, 255, 255, 0.55);
+  --titan-liquid-border-bottom: rgba(0, 0, 0, 0.08);
+  --titan-liquid-highlight: rgba(255, 255, 255, 0.85);
+  --titan-liquid-shadow:
+    0 8px 48px rgba(0, 0, 0, 0.08), 0 2px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  --titan-liquid-input-bg: rgba(255, 255, 255, 0.35);
+  --titan-liquid-input-border: rgba(0, 0, 0, 0.08);
+  --titan-liquid-input-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  --titan-liquid-btn-bg: rgba(255, 255, 255, 0.4);
+  --titan-liquid-btn-border: rgba(255, 255, 255, 0.6);
+  --titan-liquid-btn-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --titan-liquid-btn-hover-bg: rgba(255, 255, 255, 0.55);
+  --titan-liquid-btn-hover-border: rgba(255, 255, 255, 0.75);
+  --titan-liquid-btn-primary-bg: rgba(0, 0, 0, 0.75);
+  --titan-liquid-btn-primary-border: rgba(0, 0, 0, 0.15);
+  --titan-liquid-btn-primary-text: #ffffff;
+  --titan-liquid-btn-primary-hover-bg: rgba(0, 0, 0, 0.85);
+  --titan-liquid-text: #0a0a0a;
+  --titan-liquid-text-muted: rgba(0, 0, 0, 0.5);
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --titan-primary: #ffffff;
+  --titan-secondary: #121214;
+  --titan-secondary-rgb: 18, 18, 20;
+  --titan-bg: #0b0b0d;
+  --titan-bg-rgb: 11, 11, 13;
+  --titan-accent: rgba(255, 255, 255, 0.72);
+  --titan-nav-bg: rgba(13, 13, 16, 0.78);
+  --titan-nav-item: rgba(255, 255, 255, 0.68);
+  --titan-nav-item-active-bg: rgba(255, 255, 255, 0.075);
+  --titan-danger: #ff4d5e;
+  --titan-danger-light: #ff6b7a;
+  --titan-danger-rgb: 255, 77, 94;
+  --titan-card-bg: rgba(22, 22, 26, 0.36);
+  --titan-card-border: rgba(255, 255, 255, 0.22);
+  --titan-glass-bg: rgba(18, 18, 22, 0.3);
+  --titan-glass-border: rgba(255, 255, 255, 0.22);
+  --titan-glass-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --titan-text-muted: rgba(255, 255, 255, 0.58);
+  --titan-glow: rgba(255, 255, 255, 0.2);
+  --titan-input-bg: rgba(22, 22, 26, 0.56);
+  --titan-input-border: rgba(255, 255, 255, 0.14);
+  --titan-hover: rgba(255, 255, 255, 0.075);
+  --titan-border-hover: rgba(255, 255, 255, 0.28);
+  --titan-edge-highlight: rgba(255, 255, 255, 0.16);
+  --titan-edge-shadow: rgba(0, 0, 0, 0.68);
+  --titan-button-bg: rgba(20, 20, 24, 0.34);
+  --titan-page-gradient:
+    radial-gradient(
+      ellipse at 14% 8%,
+      rgba(233, 233, 233, 0.06) 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 86% 14%,
+      rgba(154, 154, 154, 0.05) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 46% 92%,
+      rgba(69, 69, 69, 0.07) 0%,
+      transparent 48%
+    );
+
+  /* Neomorphism — dark: soft diffuse shadows, no hard inset edges */
+  --titan-neo-bg: rgba(20, 20, 24, 0.7);
+  --titan-neo-raised:
+    0 8px 40px rgba(0, 0, 0, 0.55), 0 2px 14px rgba(0, 0, 0, 0.35);
+  --titan-neo-raised-sm:
+    0 6px 28px rgba(0, 0, 0, 0.45), 0 2px 10px rgba(0, 0, 0, 0.28);
+  --titan-neo-inset: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  --titan-neo-hover:
+    0 12px 48px rgba(0, 0, 0, 0.6), 0 4px 18px rgba(0, 0, 0, 0.35);
+  --titan-sidebar-bg: rgba(16, 16, 20, 0.58);
+  --titan-sidebar-width: 80px;
+  --titan-sidebar-expanded: 220px;
+
+  /* Liquid Glass */
+  --titan-liquid-bg: rgba(10, 10, 14, 0.55);
+  --titan-liquid-border: rgba(255, 255, 255, 0.12);
+  --titan-liquid-border-bottom: rgba(0, 0, 0, 0.5);
+  --titan-liquid-highlight: rgba(255, 255, 255, 0.1);
+  --titan-liquid-shadow:
+    0 8px 48px rgba(0, 0, 0, 0.5), 0 2px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  --titan-liquid-input-bg: rgba(0, 0, 0, 0.3);
+  --titan-liquid-input-border: rgba(255, 255, 255, 0.1);
+  --titan-liquid-input-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
+  --titan-liquid-btn-bg: rgba(255, 255, 255, 0.1);
+  --titan-liquid-btn-border: rgba(255, 255, 255, 0.14);
+  --titan-liquid-btn-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --titan-liquid-btn-hover-bg: rgba(255, 255, 255, 0.18);
+  --titan-liquid-btn-hover-border: rgba(255, 255, 255, 0.24);
+  --titan-liquid-btn-primary-bg: rgba(255, 255, 255, 0.88);
+  --titan-liquid-btn-primary-border: rgba(255, 255, 255, 0.6);
+  --titan-liquid-btn-primary-text: #0a0a0a;
+  --titan-liquid-btn-primary-hover-bg: rgba(255, 255, 255, 0.95);
+  --titan-liquid-text: #ffffff;
+  --titan-liquid-text-muted: rgba(255, 255, 255, 0.55);
+}
+
+@layer base {
+  body {
+    @apply overflow-hidden m-0 p-0;
+    font-family:
+      "Inter",
+      -apple-system,
+      system-ui,
+      BlinkMacSystemFont,
+      sans-serif;
+    background-color: var(--titan-bg);
+    background-image: var(--titan-page-gradient);
+    background-attachment: fixed;
+    background-size: 160% 160%;
+    animation: titan-page-gradient-drift 20s ease-in-out infinite alternate;
+    color: var(--titan-primary);
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Animation Utilities ── */
+@keyframes titan-page-gradient-drift {
+  0% {
+    background-position:
+      0% 42%,
+      100% 56%,
+      48% 100%;
+  }
+  50% {
+    background-position:
+      54% 62%,
+      42% 34%,
+      62% 52%;
+  }
+  100% {
+    background-position:
+      100% 48%,
+      0% 52%,
+      38% 0%;
+  }
+}
+
+@keyframes titan-gradient-drift {
+  0% {
+    background-position:
+      0% 40%,
+      100% 60%;
+    transform: scale(1);
+  }
+  50% {
+    background-position:
+      50% 60%,
+      48% 42%;
+    transform: scale(1.03);
+  }
+  100% {
+    background-position:
+      100% 48%,
+      0% 52%;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px var(--titan-glow),
+      0 0 20px var(--titan-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 15px var(--titan-glow),
+      0 0 40px var(--titan-glow);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(4px) rotate(-1deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Smooth theme transitions on key elements */
+[data-theme] * {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Disable transitions on animation-heavy elements to avoid conflicts */
+[data-theme] .no-theme-transition,
+[data-theme] .no-theme-transition * {
+  transition-property: none !important;
+}
+
+/* ── Liquid Glass Utilities ── */
+.liquid-glass {
+  background: var(--titan-liquid-bg);
+  border: 1px solid var(--titan-liquid-border);
+  border-bottom-color: var(--titan-liquid-border-bottom);
+  box-shadow: var(--titan-liquid-shadow);
+  -webkit-backdrop-filter: blur(48px) saturate(220%) brightness(1.05);
+  backdrop-filter: blur(48px) saturate(220%) brightness(1.05);
+}
+
+.liquid-glass-btn {
+  background: var(--titan-liquid-btn-bg);
+  border: 1px solid var(--titan-liquid-btn-border);
+  border-bottom-color: var(--titan-liquid-border-bottom);
+  box-shadow: var(--titan-liquid-btn-shadow);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+}
+
+.liquid-glass-btn:hover {
+  background: var(--titan-liquid-btn-hover-bg, var(--titan-liquid-btn-bg));
+  border-color: var(
+    --titan-liquid-btn-hover-border,
+    var(--titan-liquid-btn-border)
+  );
+}
+
+.liquid-glass-btn-primary {
+  background: var(--titan-liquid-btn-primary-bg);
+  border: 1px solid var(--titan-liquid-btn-primary-border);
+  border-bottom-color: var(--titan-liquid-border-bottom);
+  box-shadow: var(--titan-liquid-btn-shadow);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  color: var(--titan-liquid-btn-primary-text);
+}
+
+.liquid-glass-btn-primary:hover {
+  background: var(
+    --titan-liquid-btn-primary-hover-bg,
+    var(--titan-liquid-btn-primary-bg)
+  );
+}
+
+.liquid-glass-input {
+  background: var(--titan-liquid-input-bg);
+  border: 1px solid var(--titan-liquid-input-border);
+  box-shadow: var(--titan-liquid-input-shadow);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
