@@ -21,19 +21,17 @@ import logoDark from "../../../../assets/logo.png";
 // Lazy-loaded Component Pages for better performance and smaller initial bundle sizing
 const Home = lazy(() => import("../../../../pages/Home"));
 const Chats = lazy(() => import("../../../chat/pages/Chats"));
-const Insights = lazy(() => import("../../../analytics/pages/Insights"));
 const Develop = lazy(() => import("../../../platform/pages/Develop"));
 const Archives = lazy(() => import("../../../chat/pages/Archives"));
 const Team = lazy(() => import("../../../team/pages/Team"));
 const Reports = lazy(() => import("../../../analytics/pages/Reports"));
-const Extensions = lazy(() => import("../../../platform/pages/Extensions"));
+const Engage = lazy(() => import("../../../engage/pages/Engage"));
 const Settings = lazy(() => import("../../../settings/pages/Settings"));
 
 // Determine animation variant based on route index for mixed transitions
 const routeVariants = [
   "fadeUp",
   "slideLeft",
-  "morphScale",
   "slideLeft",
   "fadeUp",
   "slideLeft",
@@ -48,6 +46,7 @@ const AdminDashboard = () => {
   const location = useLocation();
 
   const [showSplash, setShowSplash] = useState(true);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const splashRef = useRef(null);
   const splashLogoRef = useRef(null);
   const contentRef = useRef(null);
@@ -100,12 +99,11 @@ const AdminDashboard = () => {
     const paths = [
       "/",
       "/chats",
-      "/insights",
       "/develop",
       "/archives",
       "/team",
       "/reports",
-      "/extensions",
+      "/engage",
       "/settings",
     ];
     const currentSub = location.pathname.replace("/admin-dashboard", "") || "/";
@@ -115,13 +113,12 @@ const AdminDashboard = () => {
 
   const adminNavItems = [
     { label: "Home", path: "/admin-dashboard" },
+    { label: "Engage", path: "/admin-dashboard/engage" },
     { label: "Chats", path: "/admin-dashboard/chats" },
-    { label: "Insights", path: "/admin-dashboard/insights" },
     { label: "Develop", path: "/admin-dashboard/develop" },
     { label: "Archives", path: "/admin-dashboard/archives" },
     { label: "Team", path: "/admin-dashboard/team" },
     { label: "Reports", path: "/admin-dashboard/reports" },
-    { label: "Extensions", path: "/admin-dashboard/extensions" },
   ];
 
   return (
@@ -129,7 +126,7 @@ const AdminDashboard = () => {
       {/* Splash Screen */}
       <div
         ref={splashRef}
-        className={`fixed inset-0 z-[100] flex flex-col items-center justify-center no-theme-transition ${isDark ? "bg-black" : "bg-white"}`}
+        className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center no-theme-transition ${isDark ? "bg-black" : "bg-white"}`}
       >
         <img
           ref={splashLogoRef}
@@ -145,13 +142,18 @@ const AdminDashboard = () => {
       </div>
 
       {/* Sidebar Nav */}
-      <TopNavBar user={user} logout={logout} navItems={adminNavItems} />
+      <TopNavBar
+        user={user}
+        logout={logout}
+        navItems={adminNavItems}
+        onExpandChange={setSidebarExpanded}
+      />
 
       {/* Content Area — offset by sidebar width */}
       <main
         ref={contentRef}
         data-main-content
-        className="relative z-10 flex-grow h-screen overflow-y-auto pl-0 md:pl-[96px] pt-14 md:pt-0 pr-4 sm:pr-6 lg:pr-8 opacity-0 transition-[padding] duration-300"
+        className={`relative z-10 flex-grow h-screen overflow-y-auto pt-14 md:pt-0 pr-4 sm:pr-6 lg:pr-8 opacity-0 transition-[padding] duration-300 ${sidebarExpanded ? "pl-0 md:pl-[216px]" : "pl-0 md:pl-[96px]"}`}
       >
         <div className="max-w-[1600px] mx-auto h-[calc(100vh-3.5rem)] md:h-screen py-4 md:py-6 2xl:py-8">
           <Suspense fallback={<SkeletonLoader type="page" />}>
@@ -160,12 +162,11 @@ const AdminDashboard = () => {
                 <Routes location={location}>
                   <Route path="/" element={<Home />} />
                   <Route path="/chats" element={<Chats />} />
-                  <Route path="/insights" element={<Insights />} />
                   <Route path="/develop" element={<Develop />} />
                   <Route path="/archives" element={<Archives />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/reports" element={<Reports />} />
-                  <Route path="/extensions" element={<Extensions />} />
+                  <Route path="/engage" element={<Engage />} />
                   <Route path="/settings" element={<Settings />} />
                 </Routes>
               </AnimatedPage>

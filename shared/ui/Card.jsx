@@ -7,7 +7,7 @@ export const Card = forwardRef(
       <motion.div
         ref={ref}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className={`relative bg-[var(--titan-card-bg)] backdrop-blur-xl border border-[var(--titan-card-border)] py-6 px-5 rounded-2xl sm:px-8 transition-[border-color,background-color,box-shadow,transform] duration-300 ${className}`}
+        className={`relative bg-[var(--titan-card-bg)] backdrop-blur-xl border border-[var(--titan-card-border)] hover:border-[var(--titan-border-hover)] py-6 px-5 rounded-2xl sm:px-8 transition-[border-color,background-color,box-shadow,transform] duration-300 ${className}`}
         style={{
           perspective: 1200,
           transformStyle: "preserve-3d",

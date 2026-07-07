@@ -68,7 +68,7 @@ const Home = () => {
           {stats.map(({ icon: Icon, label, value }) => (
             <motion.div key={label} variants={cardVariants}>
               <Card hover3d className="!p-5 flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[var(--titan-hover)] flex items-center justify-center text-[var(--titan-text-muted)]">
+                <div className="w-10 h-10 rounded-xl bg-[var(--titan-hover)] border border-[var(--titan-card-border)] flex items-center justify-center text-[var(--titan-text-muted)]">
                   <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
                 <div>

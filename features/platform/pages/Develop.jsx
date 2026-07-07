@@ -1,59 +1,113 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import PageWrapper from "../../../shared/components/PageWrapper";
-import { Card } from "../../../shared/ui";
-import { Code, Terminal, Cpu } from "lucide-react";
+import { mockExistingBots } from "../data/developMockData";
+import BotLanding from "../components/BotLanding";
+import BotList from "../components/BotList";
+import BotConfigWizard from "../components/BotConfigWizard";
+import BotChecklist from "../components/BotChecklist";
+
+// View states: landing | create | list | edit | checklist
+const pageTransition = {
+  initial: { opacity: 0, y: 10, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  exit: { opacity: 0, y: -10, filter: "blur(4px)" },
+  transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+};
 
 const Develop = () => {
+  const [view, setView] = useState("landing");
+  const [selectedBot, setSelectedBot] = useState(null);
+  const [submittedForm, setSubmittedForm] = useState(null);
+
+  const handleLandingSelect = useCallback((option) => {
+    if (option === "create") {
+      setSelectedBot(null);
+      setView("create");
+    } else if (option === "status") {
+      setView("status");
+    } else {
+      setView("list");
+    }
+  }, []);
+
+  const handleBotSelect = useCallback((bot) => {
+    setSelectedBot(bot);
+    setView("edit");
+  }, []);
+
+  const handleWizardSubmit = useCallback((form) => {
+    setSubmittedForm(form);
+    setView("checklist");
+  }, []);
+
+  const handleChecklistEdit = useCallback(() => {
+    setSelectedBot(submittedForm);
+    setView(selectedBot ? "edit" : "create");
+  }, [submittedForm, selectedBot]);
+
   return (
-    <PageWrapper
-      title="Develop"
-      description="Create and fine-tune your chat models."
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="h-full w-full"
-      >
-        <Card
-          hover3d
-          className="!p-8 h-full flex flex-col items-center justify-center"
-        >
-          <div className="flex gap-6 mb-6">
-            {[Code, Terminal, Cpu].map((Icon, i) => (
-              <motion.div
-                key={i}
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 2.5,
-                  delay: i * 0.3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Icon
-                  className="w-10 h-10 text-[var(--titan-text-muted)]"
-                  strokeWidth={1.2}
-                />
-              </motion.div>
-            ))}
-          </div>
-          <h3 className="text-lg font-semibold text-[var(--titan-primary)] mb-2">
-            Development Playground
-          </h3>
-          <p className="text-[var(--titan-text-muted)] text-sm text-center max-w-sm">
-            Build, test, and fine-tune your chat models and AI pipelines.
-          </p>
+    <PageWrapper title="Develop">
+      <AnimatePresence mode="wait">
+        {view === "landing" && (
           <motion.div
-            className="mt-6 px-4 py-2 rounded-full border border-[var(--titan-glass-border)] text-xs font-medium text-[var(--titan-text-muted)]"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            key="landing"
+            {...pageTransition}
+            className="flex-1 flex flex-col"
           >
-            Coming Soon
+            <BotLanding onSelect={handleLandingSelect} />
           </motion.div>
-        </Card>
-      </motion.div>
+        )}
+
+        {view === "list" && (
+          <motion.div key="list" {...pageTransition} className="flex-1">
+            <BotList
+              bots={mockExistingBots.filter((b) => b.status === "active")}
+              onSelect={handleBotSelect}
+              onBack={() => setView("landing")}
+            />
+          </motion.div>
+        )}
+
+        {view === "status" && (
+          <motion.div key="status" {...pageTransition} className="flex-1">
+            <BotList
+              bots={mockExistingBots.filter((b) => b.status === "pending")}
+              onSelect={(bot) => {
+                setSubmittedForm(bot);
+                setView("checklist");
+              }}
+              onBack={() => setView("landing")}
+              statusMode
+            />
+          </motion.div>
+        )}
+
+        {(view === "create" || view === "edit") && (
+          <motion.div
+            key="wizard"
+            {...pageTransition}
+            className="flex-1 flex flex-col"
+          >
+            <BotConfigWizard
+              mode={view === "create" ? "create" : "edit"}
+              initialData={selectedBot}
+              onBack={() => setView(view === "create" ? "landing" : "list")}
+              onSubmit={handleWizardSubmit}
+            />
+          </motion.div>
+        )}
+
+        {view === "checklist" && submittedForm && (
+          <motion.div key="checklist" {...pageTransition} className="flex-1">
+            <BotChecklist
+              form={submittedForm}
+              onBack={() => setView("landing")}
+              onEdit={handleChecklistEdit}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </PageWrapper>
   );
 };

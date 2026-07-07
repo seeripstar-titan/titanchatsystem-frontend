@@ -4,41 +4,39 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logoLight from "../../assets/titan2.png";
 import logoDark from "../../assets/logo.png";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Home,
-  MessageSquare,
-  BarChart2,
-  Code,
-  Archive,
-  Users,
-  FileText,
-  Puzzle,
-  Settings,
-  LogOut,
-  Sun,
-  Moon,
-  Menu,
-  X,
-  ChevronsRight,
-  ChevronsLeft,
-} from "lucide-react";
+  Home02Icon,
+  ChatEdit01Icon,
+  ComputerProgramming01Icon,
+  ArchiveArrowDownIcon,
+  UserGroupIcon,
+  LicenseDraftIcon,
+  CursorPointer01Icon,
+  Setting07Icon,
+  Logout01Icon,
+  Download01Icon,
+  Menu01Icon,
+  Cancel01Icon,
+  ArrowRightDoubleIcon,
+  Sun01Icon,
+  Moon02Icon,
+} from "@hugeicons/core-free-icons";
 import { useTheme } from "../../context/ThemeContext";
 import Logger from "../../services/logger/Logger";
-import { Download } from "lucide-react";
 
 const iconMap = {
-  Home: Home,
-  Chats: MessageSquare,
-  Insights: BarChart2,
-  Develop: Code,
-  Archives: Archive,
-  Team: Users,
-  Reports: FileText,
-  Extensions: Puzzle,
-  Settings: Settings,
+  Home: Home02Icon,
+  Engage: CursorPointer01Icon,
+  Chats: ChatEdit01Icon,
+  Develop: ComputerProgramming01Icon,
+  Archives: ArchiveArrowDownIcon,
+  Team: UserGroupIcon,
+  Reports: LicenseDraftIcon,
+  Settings: Setting07Icon,
 };
 
-const SidebarNav = ({ user, logout, navItems }) => {
+const SidebarNav = ({ user, logout, navItems, onExpandChange }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
@@ -103,7 +101,11 @@ const SidebarNav = ({ user, logout, navItems }) => {
 
         {/* Expand Toggle */}
         <motion.button
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => {
+            const next = !expanded;
+            setExpanded(next);
+            onExpandChange?.(next);
+          }}
           whileHover={{ scale: 1.28 }}
           whileTap={{ scale: 0.9 }}
           className="w-8 h-8 flex items-center justify-center text-[var(--titan-primary)]/70 hover:text-[var(--titan-primary)] cursor-pointer mt-1 mb-1 transition-colors"
@@ -113,7 +115,12 @@ const SidebarNav = ({ user, logout, navItems }) => {
             animate={{ rotate: expanded ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            <ChevronsRight className="w-4 h-4" strokeWidth={2} />
+            <HugeiconsIcon
+              icon={ArrowRightDoubleIcon}
+              size={16}
+              color="currentColor"
+              strokeWidth={2}
+            />
           </motion.div>
         </motion.button>
 
@@ -121,13 +128,13 @@ const SidebarNav = ({ user, logout, navItems }) => {
         <div className="w-10 h-px bg-[var(--titan-card-border)]" />
 
         {/* Nav Items */}
-        <nav className="flex-1 overflow-y-auto overflow-x-visible py-4 w-full flex flex-col items-center gap-4">
+        <nav className="flex-1 overflow-y-auto overflow-x-visible py-4 w-full flex flex-col items-center gap-6">
           {navItems.map((item, i) => {
             const isActive =
               location.pathname === item.path ||
               (item.path !== "/admin-dashboard" &&
                 location.pathname.startsWith(item.path));
-            const IconComponent = iconMap[item.label] || Settings;
+            const iconData = iconMap[item.label] || Setting07Icon;
 
             return (
               <motion.button
@@ -169,9 +176,12 @@ const SidebarNav = ({ user, logout, navItems }) => {
                   setHoveredNavIndex(null);
                 }}
               >
-                <IconComponent
-                  className="w-5 h-5 relative z-10 shrink-0"
-                  strokeWidth={isActive ? 2.2 : 1.8}
+                <HugeiconsIcon
+                  icon={iconData}
+                  size={20}
+                  color="currentColor"
+                  strokeWidth={isActive ? 2.2 : 1.5}
+                  className="relative z-10 shrink-0"
                 />
                 {expanded && (
                   <span className="relative z-10 text-sm font-medium whitespace-nowrap overflow-hidden">
@@ -202,7 +212,7 @@ const SidebarNav = ({ user, logout, navItems }) => {
                   }}
                 >
                   <div
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap border text-[var(--titan-primary)] bg-[var(--titan-glass-bg)] border-[var(--titan-glass-border)]"
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap border text-[var(--titan-primary)] bg-[var(--titan-glass-bg)] border-[var(--titan-card-border)]"
                     style={{
                       backdropFilter: "blur(30px) saturate(190%)",
                       WebkitBackdropFilter: "blur(30px) saturate(190%)",
@@ -251,12 +261,45 @@ const SidebarNav = ({ user, logout, navItems }) => {
                 transition={{ duration: 0.2 }}
               >
                 {isDark ? (
-                  <Sun className="w-[18px] h-[18px]" />
+                  <HugeiconsIcon
+                    icon={Sun01Icon}
+                    size={18}
+                    color="currentColor"
+                    strokeWidth={1.5}
+                  />
                 ) : (
-                  <Moon className="w-[18px] h-[18px]" />
+                  <HugeiconsIcon
+                    icon={Moon02Icon}
+                    size={18}
+                    color="currentColor"
+                    strokeWidth={1.5}
+                  />
                 )}
               </motion.div>
             </AnimatePresence>
+          </motion.button>
+
+          {/* Settings */}
+          <motion.button
+            onClick={() => {
+              const firstPath = navItems[0]?.path || "/admin-dashboard";
+              const basePath = firstPath.split("/").slice(0, 2).join("/");
+              navigate(`${basePath}/settings`);
+            }}
+            whileHover={{
+              scale: 1.34,
+              transition: { type: "spring", stiffness: 400, damping: 20 },
+            }}
+            whileTap={{ scale: 0.92 }}
+            className="w-10 h-10 flex items-center justify-center text-[var(--titan-primary)]/60 hover:text-[var(--titan-primary)] transition-colors duration-200 cursor-pointer"
+            title="Settings"
+          >
+            <HugeiconsIcon
+              icon={Setting07Icon}
+              size={18}
+              color="currentColor"
+              strokeWidth={1.5}
+            />
           </motion.button>
 
           {/* User / Dropdown */}
@@ -283,8 +326,11 @@ const SidebarNav = ({ user, logout, navItems }) => {
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: -8, scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="absolute left-full bottom-0 ml-3 w-52 rounded-2xl bg-[var(--titan-card-bg)] backdrop-blur-xl border border-[var(--titan-card-border)] z-[999] overflow-hidden"
-                  style={{ boxShadow: "var(--titan-neo-raised)" }}
+                  className="absolute left-full bottom-0 ml-3 w-52 rounded-2xl bg-[var(--titan-bg)] border border-[var(--titan-card-border)] z-[999] overflow-hidden"
+                  style={{
+                    boxShadow:
+                      "0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10)",
+                  }}
                 >
                   <div className="px-3.5 py-2.5 border-b border-[var(--titan-card-border)]">
                     <p className="text-[10px] text-[var(--titan-text-muted)] uppercase tracking-wider">
@@ -307,9 +353,12 @@ const SidebarNav = ({ user, logout, navItems }) => {
                       }}
                       className="w-full text-left flex items-center px-3.5 py-2 text-xs text-[var(--titan-text-muted)] hover:bg-[var(--titan-hover)] hover:text-[var(--titan-primary)] transition-colors rounded-lg"
                     >
-                      <Download
-                        className="w-3.5 h-3.5 mr-2"
+                      <HugeiconsIcon
+                        icon={Download01Icon}
+                        size={14}
+                        color="currentColor"
                         strokeWidth={1.5}
+                        style={{ marginRight: 8 }}
                       />
                       Export Logs
                     </button>
@@ -331,7 +380,13 @@ const SidebarNav = ({ user, logout, navItems }) => {
                         e.currentTarget.style.background = "transparent";
                       }}
                     >
-                      <LogOut className="w-3.5 h-3.5 mr-2" strokeWidth={1.5} />
+                      <HugeiconsIcon
+                        icon={Logout01Icon}
+                        size={14}
+                        color="currentColor"
+                        strokeWidth={1.5}
+                        style={{ marginRight: 8 }}
+                      />
                       Sign out
                     </button>
                   </div>
@@ -363,9 +418,19 @@ const SidebarNav = ({ user, logout, navItems }) => {
                 transition={{ duration: 0.15 }}
               >
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5" strokeWidth={1.5} />
+                  <HugeiconsIcon
+                    icon={Cancel01Icon}
+                    size={20}
+                    color="currentColor"
+                    strokeWidth={1.5}
+                  />
                 ) : (
-                  <Menu className="w-5 h-5" strokeWidth={1.5} />
+                  <HugeiconsIcon
+                    icon={Menu01Icon}
+                    size={20}
+                    color="currentColor"
+                    strokeWidth={1.5}
+                  />
                 )}
               </motion.div>
             </AnimatePresence>
@@ -386,9 +451,19 @@ const SidebarNav = ({ user, logout, navItems }) => {
               style={{ boxShadow: "var(--titan-neo-raised-sm)" }}
             >
               {isDark ? (
-                <Sun className="w-4 h-4" />
+                <HugeiconsIcon
+                  icon={Sun01Icon}
+                  size={16}
+                  color="currentColor"
+                  strokeWidth={1.5}
+                />
               ) : (
-                <Moon className="w-4 h-4" />
+                <HugeiconsIcon
+                  icon={Moon02Icon}
+                  size={16}
+                  color="currentColor"
+                  strokeWidth={1.5}
+                />
               )}
             </motion.button>
             <div
@@ -440,7 +515,7 @@ const SidebarNav = ({ user, logout, navItems }) => {
                   location.pathname === item.path ||
                   (item.path !== "/admin-dashboard" &&
                     location.pathname.startsWith(item.path));
-                const IconComponent = iconMap[item.label] || Settings;
+                const mobileIconData = iconMap[item.label] || Setting07Icon;
                 return (
                   <motion.button
                     key={item.label}
@@ -469,9 +544,12 @@ const SidebarNav = ({ user, logout, navItems }) => {
                         : "var(--titan-button-bg)",
                     }}
                   >
-                    <IconComponent
-                      className="w-4 h-4 mr-3"
+                    <HugeiconsIcon
+                      icon={mobileIconData}
+                      size={16}
+                      color="currentColor"
                       strokeWidth={isActive ? 2 : 1.5}
+                      style={{ marginRight: 12 }}
                     />
                     {item.label}
                   </motion.button>

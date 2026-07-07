@@ -18,7 +18,7 @@ export const GlassPanel = forwardRef(
     return (
       <Component
         ref={ref}
-        className={`relative bg-[var(--titan-glass-bg)] backdrop-blur-xl border border-[var(--titan-glass-border)] rounded-2xl overflow-visible transition-[border-color,background-color,box-shadow] duration-300 ${padding} ${className}`}
+        className={`relative bg-[var(--titan-glass-bg)] backdrop-blur-xl border border-[var(--titan-card-border)] hover:border-[var(--titan-border-hover)] rounded-2xl overflow-visible transition-[border-color,background-color,box-shadow] duration-300 ${padding} ${className}`}
         style={{
           WebkitBackdropFilter: "blur(30px) saturate(190%)",
           backdropFilter: "blur(30px) saturate(190%)",

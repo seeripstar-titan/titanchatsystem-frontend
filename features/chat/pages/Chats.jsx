@@ -430,10 +430,7 @@ const Chats = () => {
     : null;
 
   return (
-    <PageWrapper
-      title="Live Chats"
-      description="Manage incoming user chat requests in real-time."
-    >
+    <PageWrapper title="Live Chats">
       <div className="h-full w-full flex flex-col lg:flex-row gap-4 lg:gap-6 mt-4">
         {/* Left Side: Queues and Active Sessions List */}
         <div className="w-full lg:w-1/3 xl:w-[30%] 2xl:w-[28%] flex flex-col gap-4 lg:gap-6">
@@ -462,7 +459,7 @@ const Chats = () => {
                       className={`w-full text-left p-3 flex flex-col gap-2 rounded-lg border backdrop-blur-md transition-all duration-300 ${
                         currentSessionId === sess.id
                           ? "border-[var(--titan-card-border)] bg-[var(--titan-card-bg)] text-[var(--titan-primary)]"
-                          : "border-[var(--titan-glass-border)] bg-[var(--titan-glass-bg)] text-[var(--titan-primary)]/80"
+                          : "border-[var(--titan-card-border)] bg-[var(--titan-glass-bg)] text-[var(--titan-primary)]/80"
                       }`}
                       style={{ boxShadow: "var(--titan-glass-shadow)" }}
                     >
@@ -516,7 +513,7 @@ const Chats = () => {
                       className={`p-3 border rounded-lg text-[var(--titan-primary)] backdrop-blur-md flex flex-col gap-2 transition-all duration-300 ${
                         activeSessions[item.id]
                           ? "border-[var(--titan-card-border)] bg-[var(--titan-card-bg)]"
-                          : "border-[var(--titan-glass-border)] bg-[var(--titan-glass-bg)]"
+                          : "border-[var(--titan-card-border)] bg-[var(--titan-glass-bg)]"
                       }`}
                       style={{ boxShadow: "var(--titan-glass-shadow)" }}
                     >
@@ -567,7 +564,13 @@ const Chats = () => {
         >
           {activeSessionDetails ? (
             <>
-              <div className="p-4 border-b border-[var(--titan-glass-border)] bg-[var(--titan-glass-bg)] flex justify-between items-center">
+              <div
+                className="p-4 border-b border-[var(--titan-card-border)] bg-[var(--titan-glass-bg)] flex justify-between items-center"
+                style={{
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                }}
+              >
                 <div>
                   <h3 className="text-[var(--titan-primary)] font-medium">
                     {activeSessionDetails.user_name ||
@@ -610,7 +613,7 @@ const Chats = () => {
                         className={`px-4 py-2 rounded-2xl max-w-[70%] text-sm ${
                           msg.sender === "agent" || msg.sender === "assistant"
                             ? "bg-[var(--titan-primary)] text-[var(--titan-bg)] border border-[var(--titan-card-border)] shadow-sm rounded-br-none font-medium"
-                            : "bg-[var(--titan-secondary)] text-[var(--titan-primary)] border border-[var(--titan-glass-border)] shadow-sm rounded-bl-none font-medium"
+                            : "bg-[var(--titan-secondary)] text-[var(--titan-primary)] border border-[var(--titan-card-border)] shadow-sm rounded-bl-none font-medium"
                         }`}
                       >
                         {msg.text}
@@ -623,7 +626,7 @@ const Chats = () => {
 
               <form
                 onSubmit={sendMessage}
-                className="p-4 bg-[var(--titan-glass-bg)] border-t border-[var(--titan-glass-border)] flex gap-2 shrink-0"
+                className="p-4 bg-[var(--titan-glass-bg)] border-t border-[var(--titan-card-border)] flex gap-2 shrink-0"
               >
                 <input
                   type="text"

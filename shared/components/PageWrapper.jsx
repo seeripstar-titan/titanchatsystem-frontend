@@ -31,7 +31,7 @@ const PageWrapper = ({ title, description, children }) => {
     >
       <motion.div
         variants={itemVariants}
-        className="mb-4 sm:mb-5 lg:mb-6 shrink-0"
+        className="mb-3 sm:mb-4 lg:mb-5 shrink-0"
       >
         <h1 className="text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl font-bold text-[var(--titan-primary)] mb-1.5 tracking-[-0.03em] drop-shadow-[0_12px_30px_var(--titan-glow)]">
           {title}

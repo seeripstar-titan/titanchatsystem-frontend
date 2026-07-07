@@ -18,19 +18,19 @@
   --titan-danger-light: #ef4444;
   --titan-danger-rgb: 220, 38, 38;
   --titan-card-bg: rgba(255, 255, 255, 0.34);
-  --titan-card-border: rgba(0, 0, 0, 0.12);
+  --titan-card-border: rgba(0, 0, 0, 0.18);
   --titan-glass-bg: rgba(255, 255, 255, 0.28);
-  --titan-glass-border: rgba(255, 255, 255, 0.68);
+  --titan-glass-border: rgba(0, 0, 0, 0.13);
   --titan-glass-shadow:
     18px 18px 42px rgba(0, 0, 0, 0.16),
     -16px -16px 38px rgba(255, 255, 255, 0.95),
     inset 1px 1px 0 rgba(255, 255, 255, 0.95),
     inset -1px -1px 0 rgba(0, 0, 0, 0.06);
-  --titan-text-muted: rgba(0, 0, 0, 0.5);
+  --titan-text-muted: rgba(0, 0, 0, 0.58);
   --titan-glow: rgba(0, 0, 0, 0.08);
   --titan-input-bg: rgba(255, 255, 255, 0.58);
-  --titan-input-border: rgba(0, 0, 0, 0.14);
-  --titan-hover: rgba(0, 0, 0, 0.055);
+  --titan-input-border: rgba(0, 0, 0, 0.18);
+  --titan-hover: rgba(0, 0, 0, 0.065);
   --titan-border-hover: rgba(0, 0, 0, 0.22);
   --titan-edge-highlight: rgba(255, 255, 255, 0.95);
   --titan-edge-shadow: rgba(0, 0, 0, 0.12);
@@ -113,9 +113,9 @@
   --titan-danger-light: #ff6b7a;
   --titan-danger-rgb: 255, 77, 94;
   --titan-card-bg: rgba(22, 22, 26, 0.36);
-  --titan-card-border: rgba(255, 255, 255, 0.22);
+  --titan-card-border: rgba(255, 255, 255, 0.16);
   --titan-glass-bg: rgba(18, 18, 22, 0.3);
-  --titan-glass-border: rgba(255, 255, 255, 0.22);
+  --titan-glass-border: rgba(255, 255, 255, 0.14);
   --titan-glass-shadow:
     0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 12px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.04);
@@ -184,13 +184,19 @@
 }
 
 @layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     @apply overflow-hidden m-0 p-0;
     font-family:
-      "Inter",
+      "SF Pro Display",
+      "SF Pro Text",
       -apple-system,
       system-ui,
       BlinkMacSystemFont,
+      "Inter",
       sans-serif;
     background-color: var(--titan-bg);
     background-image: var(--titan-page-gradient);
@@ -203,10 +209,31 @@
       color 0.4s ease;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
-/* ── Animation Utilities ── */
+/* ── GPU Acceleration & Performance ── */
+.backdrop-blur-xl,
+.backdrop-blur-md,
+[style*="backdrop-filter"] {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 @keyframes titan-page-gradient-drift {
   0% {
     background-position:
@@ -249,12 +276,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body {
-    animation: none;
-  }
-}
-
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -275,6 +296,36 @@
     box-shadow:
       0 0 15px var(--titan-glow),
       0 0 40px var(--titan-glow);
+  }
+}
+
+/* ── Custom Scrollbar ── */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--titan-text-muted);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--titan-primary);
+}
+
+/* ── Tab glow animation ── */
+@keyframes tab-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px var(--titan-glow),
+      0 0 20px var(--titan-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 16px var(--titan-glow),
+      0 0 36px var(--titan-glow);
   }
 }
 

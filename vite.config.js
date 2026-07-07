@@ -4,14 +4,35 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+
+    // Log every incoming request
+    {
+      name: "request-logger",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const start = Date.now();
+
+          res.on("finish", () => {
+            console.log(
+              `[${new Date().toLocaleTimeString()}] ${res.statusCode} ${req.method} ${req.url} (${Date.now() - start}ms)`,
+            );
+          });
+
+          next();
+        });
+      },
+    },
+  ],
+
   server: {
     hmr: {
       overlay: false,
     },
   },
 
-  // Show all Vite logs (default)
+  // Show all Vite logs
   logLevel: "info",
 
   resolve: {

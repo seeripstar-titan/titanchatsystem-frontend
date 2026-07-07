@@ -76,7 +76,7 @@ export const radii = {
 // ── Typography ──
 export const typography = {
   fontFamily:
-    "'Inter', -apple-system, system-ui, BlinkMacSystemFont, sans-serif",
+    "'SF Pro Display', 'SF Pro Text', -apple-system, system-ui, BlinkMacSystemFont, 'Inter', sans-serif",
   hero: {
     size: "72px",
     weight: 800,

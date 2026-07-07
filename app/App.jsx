@@ -42,7 +42,7 @@ const App = () => {
           }
         />
         <Route
-          path="/agent-dashboard"
+          path="/agent-dashboard/*"
           element={
             <ProtectedRoute allowedRoles={["agent"]}>
               <AgentDashboard />

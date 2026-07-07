@@ -23,9 +23,9 @@ const darkGradientProps = {
   cDistance: 3.6,
   cPolarAngle: 90,
   cameraZoom: 1,
-  color1: "#d4d4d4",
-  color2: "#707070",
-  color3: "#454545",
+  color1: "#3b3b3b",
+  color2: "#222222",
+  color3: "#141414",
   destination: "onCanvas",
   embedMode: "off",
   envPreset: "city",
@@ -105,7 +105,7 @@ const fallbackGradientLight =
   "radial-gradient(ellipse at 18% 28%, rgba(235,237,255,0.72) 0%, rgba(235,237,255,0.34) 36%, transparent 68%), radial-gradient(ellipse at 72% 42%, rgba(243,242,248,0.7) 0%, rgba(243,242,248,0.36) 44%, transparent 74%), radial-gradient(ellipse at 48% 86%, rgba(219,248,255,0.76) 0%, rgba(219,248,255,0.38) 48%, transparent 78%)";
 
 const fallbackGradientDark =
-  "radial-gradient(ellipse at 18% 28%, rgba(233,233,233,0.12) 0%, rgba(233,233,233,0.05) 36%, transparent 68%), radial-gradient(ellipse at 72% 42%, rgba(154,154,154,0.1) 0%, rgba(154,154,154,0.04) 44%, transparent 74%), radial-gradient(ellipse at 48% 86%, rgba(69,69,69,0.15) 0%, rgba(69,69,69,0.06) 48%, transparent 78%)";
+  "radial-gradient(ellipse at 18% 28%, rgba(59,59,59,0.18) 0%, rgba(59,59,59,0.07) 36%, transparent 68%), radial-gradient(ellipse at 72% 42%, rgba(34,34,34,0.16) 0%, rgba(34,34,34,0.06) 44%, transparent 74%), radial-gradient(ellipse at 48% 86%, rgba(20,20,20,0.2) 0%, rgba(20,20,20,0.08) 48%, transparent 78%)";
 
 const GradientBackground = ({
   className = "",

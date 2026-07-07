@@ -55,17 +55,20 @@ const Archives = () => {
   }, []);
 
   return (
-    <PageWrapper
-      title="Archives"
-      description="Review past interactions, chats, and historical data."
-    >
+    <PageWrapper title="Archives">
       <div
-        className="h-full w-full flex flex-col md:flex-row rounded-xl overflow-hidden text-[var(--titan-primary)] transition-colors bg-[var(--titan-glass-bg)] backdrop-blur-xl border border-[var(--titan-glass-border)]"
+        className="h-full w-full flex flex-col md:flex-row rounded-xl overflow-hidden text-[var(--titan-primary)] transition-colors bg-[var(--titan-glass-bg)] backdrop-blur-xl border border-[var(--titan-card-border)]"
         style={{ boxShadow: "var(--titan-glass-shadow)" }}
       >
         {/* Left Sidebar - Chat List */}
         <div className="w-full md:w-1/4 lg:w-[22%] 2xl:w-[20%] flex flex-col overflow-y-auto">
-          <div className="p-4 font-bold text-[var(--titan-primary)] bg-[var(--titan-glass-bg)]">
+          <div
+            className="p-4 font-bold text-[var(--titan-primary)] bg-[var(--titan-glass-bg)] border-b border-[var(--titan-card-border)]"
+            style={{
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+            }}
+          >
             Chat History
           </div>
           <div className="mx-3 h-px bg-[var(--titan-card-border)]" />
@@ -163,7 +166,13 @@ const Archives = () => {
 
         {/* Right Panel - User Details */}
         <div className="w-full md:w-1/4 lg:w-[22%] 2xl:w-[20%] flex flex-col overflow-y-auto">
-          <div className="p-4 font-bold text-[var(--titan-primary)] bg-[var(--titan-glass-bg)]">
+          <div
+            className="p-4 font-bold text-[var(--titan-primary)] bg-[var(--titan-glass-bg)] border-b border-[var(--titan-card-border)]"
+            style={{
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+            }}
+          >
             User Details
           </div>
           <div className="mx-3 h-px bg-[var(--titan-card-border)]" />
@@ -177,8 +186,8 @@ const Archives = () => {
                 transition={{ duration: 0.3 }}
                 className="p-6 flex flex-col gap-6"
               >
-                <div className="flex flex-col items-center gap-3 border-b border-[var(--titan-glass-border)] pb-6">
-                  <div className="w-16 h-16 bg-[var(--titan-primary)]/5 rounded-full flex items-center justify-center text-[var(--titan-text-muted)] border border-[var(--titan-glass-border)] shadow-sm">
+                <div className="flex flex-col items-center gap-3 border-b border-[var(--titan-card-border)] pb-6">
+                  <div className="w-16 h-16 bg-[var(--titan-primary)]/5 rounded-full flex items-center justify-center text-[var(--titan-text-muted)] border border-[var(--titan-card-border)] shadow-sm">
                     <UserCircle size={40} strokeWidth={1.5} />
                   </div>
                   <div className="text-center">
